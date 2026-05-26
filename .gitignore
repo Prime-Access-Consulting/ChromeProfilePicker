@@ -1,0 +1,7 @@
+# Local Chrome profile shortcut files can include personal names and paths.
+Profiles/*.lnk
+Shortcuts/*.lnk
+
+# Windows noise.
+Thumbs.db
+Desktop.ini
