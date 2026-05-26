@@ -29,6 +29,12 @@ winget install --exact --id AutoHotkey.AutoHotkey
 3. Press `Ctrl+Shift+Alt+P`.
 4. Use arrow keys and Enter to choose a profile.
 
+To stop the running picker:
+
+```powershell
+.\Stop-Picker.ps1
+```
+
 To start the picker automatically when you sign in:
 
 ```powershell
@@ -95,6 +101,8 @@ The `Profiles/*.lnk` files are ignored by git because they can contain personal 
 If the picker opens an empty folder, add at least one `.lnk` file to `Profiles`.
 
 If the hotkey does nothing, run `.\Run-Picker.ps1` again and confirm AutoHotkey v2 is installed.
+
+If Windows will not let you rename or delete the project folder, run `.\Stop-Picker.ps1` first. If you rename or move the project folder, run `.\Install-StartupShortcut.ps1` again from the new location.
 
 If `ChromeProfilePicker` does not appear as a browser option, run `.\Register-Browser.ps1` again, then reopen Windows Default apps.
 
