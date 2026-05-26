@@ -16,6 +16,10 @@ if (-not (Test-Path -LiteralPath $ahkPath)) {
 
 $startupDir = [Environment]::GetFolderPath('Startup')
 $shortcutPath = Join-Path $startupDir 'ChromeProfilePicker.lnk'
+$legacyShortcutPath = Join-Path $startupDir 'Chrome Profile Picker.lnk'
+
+Remove-Item -LiteralPath $shortcutPath -Force -ErrorAction SilentlyContinue
+Remove-Item -LiteralPath $legacyShortcutPath -Force -ErrorAction SilentlyContinue
 
 $shell = New-Object -ComObject WScript.Shell
 $shortcut = $shell.CreateShortcut($shortcutPath)

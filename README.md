@@ -102,7 +102,9 @@ If the picker opens an empty folder, add at least one `.lnk` file to `Profiles`.
 
 If the hotkey does nothing, run `.\Run-Picker.ps1` again and confirm AutoHotkey v2 is installed.
 
-If Windows will not let you rename or delete the project folder, run `.\Stop-Picker.ps1` first. If you rename or move the project folder, run `.\Install-StartupShortcut.ps1` again from the new location.
+If Windows will not let you rename or delete the project folder, run `.\Stop-Picker.ps1` first.
+
+If you rename or move the project folder, run `.\Install-StartupShortcut.ps1` again from the new location. If you use ChromeProfilePicker for links, run `.\Register-Browser.ps1` again too.
 
 If `ChromeProfilePicker` does not appear as a browser option, run `.\Register-Browser.ps1` again, then reopen Windows Default apps.
 
