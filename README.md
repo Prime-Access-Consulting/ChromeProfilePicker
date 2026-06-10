@@ -59,6 +59,8 @@ This registers `ChromeProfilePicker` as a browser candidate for `http` and `http
 
 Windows still requires a manual default-app selection. After registration, open Windows Default apps and set `ChromeProfilePicker` for both `HTTP` and `HTTPS`.
 
+The registration script also adds a per-user `ChromeHTML` fallback. This covers Windows shell paths such as Win+R with `www.example.com`, which can bypass the normal `http`/`https` default-app handler.
+
 When Windows opens this app with a URL, the picker resolves the selected `.lnk` shortcut, keeps its Chrome profile arguments, and appends the URL.
 
 To remove the browser registration:

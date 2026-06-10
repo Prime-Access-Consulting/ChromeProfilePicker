@@ -56,6 +56,7 @@ $capabilitiesKey = "$clientKey\Capabilities"
 $urlAssociationsKey = "$capabilitiesKey\URLAssociations"
 $startMenuKey = "$capabilitiesKey\Startmenu"
 $progIdKey = "Registry::HKEY_CURRENT_USER\Software\Classes\$progId"
+$chromeHtmlCommandKey = 'Registry::HKEY_CURRENT_USER\Software\Classes\ChromeHTML\shell\open\command'
 
 Ensure-Key -Path $registeredAppsKey
 Remove-ItemProperty -Path $registeredAppsKey -Name $legacyAppName -ErrorAction SilentlyContinue
@@ -82,7 +83,14 @@ New-ItemProperty -Path $progIdKey -Name 'URL Protocol' -Value '' -PropertyType S
 Set-DefaultValue -Path "$progIdKey\DefaultIcon" -Value $icon
 Set-DefaultValue -Path "$progIdKey\shell\open\command" -Value $urlCommand
 
+# Some Windows shell paths, including Win+R with scheme-less URLs like
+# www.example.com, resolve through ChromeHTML instead of the http/https
+# UserChoice handler. A per-user ChromeHTML command keeps those paths routed
+# through the picker without changing machine-wide Chrome registration.
+Set-DefaultValue -Path $chromeHtmlCommandKey -Value $urlCommand
+
 Write-Host "Registered $appName as an http/https browser candidate for this Windows user."
+Write-Host 'Registered per-user ChromeHTML fallback for scheme-less Windows shell URLs.'
 
 if (-not $NoSettings) {
     Start-Process 'ms-settings:defaultapps'
