@@ -20,7 +20,7 @@ Remove-Item -LiteralPath $progIdKey -Recurse -Force -ErrorAction SilentlyContinu
 
 if (Test-Path -LiteralPath $chromeHtmlCommandKey) {
     $chromeHtmlCommand = (Get-Item -LiteralPath $chromeHtmlCommandKey).GetValue('')
-    if ($chromeHtmlCommand -match 'ChromeProfilePicker\.ahk') {
+    if ($chromeHtmlCommand -match 'ChromeProfilePicker(-Url)?\.ahk') {
         Remove-Item -LiteralPath $chromeHtmlCommandKey -Recurse -Force -ErrorAction SilentlyContinue
         Write-Host 'Removed per-user ChromeHTML fallback.'
     }

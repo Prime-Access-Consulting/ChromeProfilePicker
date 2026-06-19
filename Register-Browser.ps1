@@ -9,6 +9,7 @@ $legacyAppName = 'Chrome Profile Picker'
 $appId = 'ChromeProfilePicker'
 $progId = 'ChromeProfilePicker.Url'
 $scriptPath = Join-Path $PSScriptRoot 'ChromeProfilePicker.ahk'
+$urlScriptPath = Join-Path $PSScriptRoot 'ChromeProfilePicker-Url.ahk'
 $ahkPath = Join-Path $env:LOCALAPPDATA 'Programs\AutoHotkey\v2\AutoHotkey64.exe'
 
 if (-not (Test-Path -LiteralPath $ahkPath)) {
@@ -24,6 +25,10 @@ if (-not (Test-Path -LiteralPath $ahkPath)) {
 
 if (-not (Test-Path -LiteralPath $scriptPath)) {
     throw "Picker script was not found: $scriptPath"
+}
+
+if (-not (Test-Path -LiteralPath $urlScriptPath)) {
+    throw "URL handler script was not found: $urlScriptPath"
 }
 
 function Ensure-Key {
@@ -47,7 +52,7 @@ function Set-DefaultValue {
 }
 
 $appCommand = "`"$ahkPath`" `"$scriptPath`""
-$urlCommand = "`"$ahkPath`" `"$scriptPath`" `"%1`""
+$urlCommand = "`"$ahkPath`" `"$urlScriptPath`" `"%1`""
 $icon = "$ahkPath,0"
 
 $registeredAppsKey = 'Registry::HKEY_CURRENT_USER\Software\RegisteredApplications'

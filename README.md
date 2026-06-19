@@ -9,6 +9,8 @@ It supports two workflows:
 
 The app uses your existing Chrome `.lnk` shortcuts as the source of truth. If a shortcut already opens the right Chrome profile, this picker can launch that same shortcut or append a URL to it.
 
+The hotkey and URL workflows use separate AutoHotkey entry points. `ChromeProfilePicker.ahk` stays resident for the global hotkey. `ChromeProfilePicker-Url.ahk` is used for browser links and exits after the link picker closes.
+
 ## Requirements
 
 - Windows
@@ -62,6 +64,8 @@ Windows still requires a manual default-app selection. After registration, open 
 The registration script also adds a per-user `ChromeHTML` fallback. This covers Windows shell paths such as Win+R with `www.example.com`, which can bypass the normal `http`/`https` default-app handler.
 
 When Windows opens this app with a URL, the picker resolves the selected `.lnk` shortcut, keeps its Chrome profile arguments, and appends the URL.
+
+If you update from an older version, rerun `.\Register-Browser.ps1` so URL handlers point to `ChromeProfilePicker-Url.ahk`.
 
 To remove the browser registration:
 
