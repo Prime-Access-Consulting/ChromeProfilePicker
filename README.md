@@ -9,7 +9,7 @@ It supports two workflows:
 
 The app uses your existing Chrome `.lnk` shortcuts as the source of truth. If a shortcut already opens the right Chrome profile, this picker can launch that same shortcut or append a URL to it.
 
-The hotkey and URL workflows use separate AutoHotkey entry points. `ChromeProfilePicker.ahk` stays resident for the global hotkey. `ChromeProfilePicker-Url.ahk` is used for browser links and exits after the link picker closes.
+The hotkey and URL workflows use separate AutoHotkey entry points. `ChromeProfilePicker.ahk` stays resident for the global hotkey. `ChromeProfilePicker-Url.ahk` is used for browser links and exits after the link picker closes. Both scripts share picker and launch behavior through `ChromeProfilePicker.Core.ahk`.
 
 ## Requirements
 
@@ -49,7 +49,7 @@ To remove the startup shortcut:
 .\Uninstall-StartupShortcut.ps1
 ```
 
-## Use For Links
+## Use for Links
 
 Run:
 
@@ -110,9 +110,13 @@ If the hotkey does nothing, run `.\Run-Picker.ps1` again and confirm AutoHotkey 
 
 If Windows will not let you rename or delete the project folder, run `.\Stop-Picker.ps1` first.
 
+If `.\Stop-Picker.ps1` warns that the picker may be running elevated, stop the listed AutoHotkey process from an elevated PowerShell or Task Manager, or reboot.
+
 If you rename or move the project folder, run `.\Install-StartupShortcut.ps1` again from the new location. If you use ChromeProfilePicker for links, run `.\Register-Browser.ps1` again too.
 
 If `ChromeProfilePicker` does not appear as a browser option, run `.\Register-Browser.ps1` again, then reopen Windows Default apps.
+
+If links do nothing and AutoHotkey eventually says it could not close the previous instance, update to the current split-handler version, rerun `.\Register-Browser.ps1`, then clear any old elevated resident picker process or reboot.
 
 If links open in the wrong profile, inspect the selected `.lnk` file and confirm it launches the intended Chrome profile directly.
 
